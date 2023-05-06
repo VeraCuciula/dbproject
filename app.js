@@ -8,6 +8,7 @@ const countriesModel = require("./models/Country");
 const expressSession = require("express-session");
 const User = require("./models/User");
 
+const morgan = require("morgan");
 
 /**
  * Controllers (route handlers).
@@ -19,6 +20,7 @@ const userController = require("./controllers/user");
 
 const app = express();
 app.set("view engine", "ejs");
+app.use(morgan('tiny'));
 
 /**
  * notice above we are using dotenv. We can now pull the values from our environment
@@ -103,6 +105,7 @@ app.get("/join", (req, res) => {
 });
 
 app.post("/join", userController.create);
+
 app.get("/login", (req, res) => {
   res.render('login-user', { errors: {} })
 });
